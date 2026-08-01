@@ -8,10 +8,14 @@ import ImportedRepositoryTable from "./ImportedRepositoryTable";
 import { getRepositories } from "../actions/getRepositories";
 import { ImportedRepository } from "../types/importedRepository";
 
+import RepositoryScanResult from "./RepositoryScanResult";
+import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
+
 export default function RepositoryDashboard() {
   const [repositories, setRepositories] = useState<ImportedRepository[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isPending, startTransition] = useTransition();
+  const [scanResult, setScanResult] = useState<ScanResult | null>(null);
 
   const loadRepositories = useCallback(() => {
     startTransition(async () => {
@@ -35,8 +39,12 @@ export default function RepositoryDashboard() {
           Loading imported repositories...
         </div>
       ) : (
-        <ImportedRepositoryTable repositories={repositories} />
+        <ImportedRepositoryTable
+          repositories={repositories}
+          onScanComplete={setScanResult}
+        />
       )}
+      <RepositoryScanResult result={scanResult} />
     </div>
   );
 }

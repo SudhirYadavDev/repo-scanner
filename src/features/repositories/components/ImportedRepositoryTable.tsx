@@ -1,13 +1,18 @@
 "use client";
 
 import { ImportedRepository } from "../types/importedRepository";
+import ImportedRepositoryRow from "./ImportedRepositoryRow";
+
+import { RepositoryScanResult } from "../scanner/scanResult";
 
 interface ImportedRepositoryTableProps {
   repositories: ImportedRepository[];
+  onScanComplete: (result: RepositoryScanResult) => void;
 }
 
 export default function ImportedRepositoryTable({
   repositories,
+  onScanComplete,
 }: ImportedRepositoryTableProps) {
   if (repositories.length === 0) {
     return (
@@ -31,32 +36,18 @@ export default function ImportedRepositoryTable({
             <th className="px-4 py-3 text-left">Visibility</th>
             <th className="px-4 py-3 text-right">Stars</th>
             <th className="px-4 py-3 text-right">Forks</th>
+            <th className="px-4 py-3 text-center">Actions</th>
             <th className="px-4 py-3 text-left">Last Synced</th>
           </tr>
         </thead>
 
         <tbody>
           {repositories.map((repository) => (
-            <tr
+            <ImportedRepositoryRow
               key={repository.id}
-              className="border-b border-gray-200 hover:bg-gray-50"
-            >
-              <td className="px-4 py-3 font-medium">{repository.fullName}</td>
-
-              <td className="px-4 py-3">{repository.language ?? "-"}</td>
-
-              <td className="px-4 py-3">{repository.visibility}</td>
-
-              <td className="px-4 py-3 text-right">{repository.stars}</td>
-
-              <td className="px-4 py-3 text-right">{repository.forks}</td>
-
-              <td className="px-4 py-3">
-                {repository.lastSyncedAt
-                  ? new Date(repository.lastSyncedAt).toLocaleString()
-                  : "-"}
-              </td>
-            </tr>
+              repository={repository}
+              onScanComplete={onScanComplete}
+            />
           ))}
         </tbody>
       </table>
