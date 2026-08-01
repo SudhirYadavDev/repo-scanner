@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { useSession } from "@/lib/auth-client";
-import RepositorySelector from "@/features/repositories/components/RepositorySelector";
+import RepositoryDashboard from "@/features/repositories/components/RepositoryDashboard";
 
 export default function DashboardPage() {
   const { data, isPending } = useSession();
@@ -35,7 +35,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <RepositorySelector />
+        <RepositoryDashboard />
       </div>
     </main>
   );

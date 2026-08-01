@@ -10,7 +10,13 @@ import { RepositoryListItem } from "../types/repository";
 
 import { importRepositories } from "../actions/importRepositories";
 
-export default function RepositorySelector() {
+interface RepositorySelectorProps {
+  onImportComplete: () => void;
+}
+
+export default function RepositorySelector({
+  onImportComplete,
+}: RepositorySelectorProps) {
   const [repositories, setRepositories] = useState<RepositoryListItem[]>([]);
   const [isSyncing, startTransition] = useTransition();
   const [search, setSearch] = useState("");
@@ -67,9 +73,9 @@ export default function RepositorySelector() {
 
   function handleImport() {
     startImportTransition(async () => {
-      const result = await importRepositories(repositories);
+      await importRepositories(repositories);
 
-      console.log(result);
+      onImportComplete();
     });
   }
 
@@ -97,7 +103,7 @@ export default function RepositorySelector() {
         <button
           onClick={handleImport}
           disabled={selectedCount === 0 || isImporting}
-          className="border border-green-600 bg-green-600 px-4 py-2 text-white disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-600"
+          className="border border-green-600 bg-green-600 px-4 py-2 text-white"
         >
           {isImporting ? "Importing..." : "Import Selected"}
         </button>

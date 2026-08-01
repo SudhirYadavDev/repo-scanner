@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 import { getUserRepositories } from "../services/github";
-import { mapGitHubRepository } from "../services/mapper";
+import { mapGitHubRepository } from "../mappers/mapper";
 
 export async function syncRepositories() {
   const session = await auth.api.getSession({
