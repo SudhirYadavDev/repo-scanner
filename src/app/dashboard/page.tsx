@@ -1,7 +1,9 @@
 "use client";
 
-import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
+
+import { useSession } from "@/lib/auth-client";
+import RepositorySelector from "@/features/repositories/components/RepositorySelector";
 
 export default function DashboardPage() {
   const { data, isPending } = useSession();
@@ -15,19 +17,25 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <Image
-          src={data?.user.image ?? ""}
-          alt={data?.user.name ?? "User"}
-          width={96}
-          height={96}
-          className="mx-auto rounded-full"
-        />
+    <main className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-5xl p-8">
+        <div className="flex items-center gap-5">
+          <Image
+            src={data?.user.image ?? ""}
+            alt={data?.user.name ?? "User"}
+            width={72}
+            height={72}
+            className="rounded-full"
+          />
 
-        <h1 className="mt-4 text-3xl font-bold">{data?.user.name}</h1>
+          <div>
+            <h1 className="text-3xl font-bold">Welcome, {data?.user.name}</h1>
 
-        <p className="text-gray-600">{data?.user.email}</p>
+            <p className="text-gray-600">{data?.user.email}</p>
+          </div>
+        </div>
+
+        <RepositorySelector />
       </div>
     </main>
   );

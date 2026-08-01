@@ -19,6 +19,7 @@ model User {
 
   sessions Session[]
   accounts Account[]
+  repositories Repository[]
 
   @@map("user")
 }
@@ -78,4 +79,45 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Repository {
+  id        String   @id @default(cuid())
+  githubId  Int      @unique
+
+  name      String
+  fullName  String   @unique
+
+  owner     String
+
+  description String?
+
+  isPrivate Boolean
+
+  htmlUrl   String
+
+  language  String?
+
+  defaultBranch String
+
+  stars      Int @default(0)
+  forks      Int @default(0)
+  openIssues Int @default(0)
+
+  size Int @default(0)
+
+  visibility String
+
+  pushedAt DateTime?
+
+  lastSyncedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("repository")
 }
