@@ -15,6 +15,7 @@ import { detectPackageManager } from "./packageManagerDetector";
 import { detectDocker } from "./dockerDetector";
 import { detectCI } from "./ciDetector";
 import { detectDatabase } from "./databaseDetector";
+import { detectTesting } from "./testingDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -50,6 +51,8 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.frameworks = detectFrameworks(dependencies);
 
       scanResult.database = detectDatabase(dependencies);
+
+      scanResult.testing = detectTesting(dependencies);
 
       scanResult.packageManager = detectPackageManager(files);
 

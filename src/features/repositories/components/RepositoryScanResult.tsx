@@ -130,6 +130,25 @@ export default function RepositoryScanResult({
       </div>
 
       <div className="border border-gray-300 bg-white p-6">
+        <h2 className="mb-4 text-xl font-semibold">Testing</h2>
+
+        <div className="flex flex-wrap gap-3">
+          {Object.entries(result.testing).map(([name, enabled]) => (
+            <span
+              key={name}
+              className={`border px-3 py-1 ${
+                enabled
+                  ? "border-green-600 bg-green-600 text-white"
+                  : "border-gray-300 bg-gray-100 text-gray-500"
+              }`}
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="border border-gray-300 bg-white p-6">
         <h2 className="mb-4 text-xl font-semibold">File Extensions</h2>
 
         <table className="min-w-full">

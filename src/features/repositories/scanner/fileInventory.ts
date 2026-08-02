@@ -63,5 +63,15 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       drizzle: false,
       mongoose: false,
     },
+
+    testing: {
+      jest: false,
+      vitest: false,
+      cypress: false,
+      playwright: false,
+      mocha: false,
+      chai: false,
+      testingLibrary: false,
+    },
   };
 }

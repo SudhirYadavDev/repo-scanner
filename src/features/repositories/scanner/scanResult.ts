@@ -48,4 +48,14 @@ export interface RepositoryScanResult {
     drizzle: boolean;
     mongoose: boolean;
   };
+
+  testing: {
+    jest: boolean;
+    vitest: boolean;
+    cypress: boolean;
+    playwright: boolean;
+    mocha: boolean;
+    chai: boolean;
+    testingLibrary: boolean;
+  };
 }
