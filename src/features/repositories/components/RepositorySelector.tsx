@@ -36,14 +36,28 @@ export default function RepositorySelector({
   ).length;
 
   useEffect(() => {
-    if (!shouldSync) return;
-
     async function loadRepositories() {
-      startImportTransition(async () => {
-        const data = await syncRepositories();
+      if (shouldSync) {
+        startImportTransition(async () => {
+          const data = await syncRepositories();
 
-        setRepositories(data);
-      });
+          sessionStorage.setItem("githubRepositories", JSON.stringify(data));
+
+          sessionStorage.setItem("lastRepoSync", new Date().toISOString());
+
+          window.dispatchEvent(new Event("repo-sync"));
+
+          setRepositories(data);
+        });
+
+        return;
+      }
+
+      const cachedRepositories = sessionStorage.getItem("githubRepositories");
+
+      if (cachedRepositories) {
+        setRepositories(JSON.parse(cachedRepositories));
+      }
     }
 
     loadRepositories();
