@@ -33,9 +33,7 @@ export default function TopBar() {
               {data?.user.name ?? "User"}
             </h1>
 
-            <p className="mt-3 text-lg text-zinc-500">
-              {data?.user.email}
-            </p>
+            <p className="mt-3 text-lg text-zinc-500">{data?.user.email}</p>
 
             <div className="mt-6">
               <h2 className="text-2xl font-semibold text-zinc-900">
@@ -51,7 +49,10 @@ export default function TopBar() {
         </div>
 
         <button
-          onClick={() => router.push("/dashboard/repositories")}
+          onClick={() => {
+            sessionStorage.setItem("allowRepoSync", "true");
+            router.push("/dashboard/repositories?sync=true");
+          }}
           className="rounded-2xl bg-zinc-900 px-8 py-5 text-sm font-medium text-white transition hover:bg-zinc-800"
         >
           Sync Repositories

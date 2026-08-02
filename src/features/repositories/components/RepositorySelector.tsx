@@ -2,21 +2,22 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 
-import { syncRepositories } from "../actions/syncRepositories";
-
 import RepositorySearch from "./RepositorySearch";
 import RepositoryTable from "./RepositoryTable";
 
 import { RepositoryListItem } from "../types/repository";
 import { importRepositories } from "../actions/importRepositories";
+import { syncRepositories } from "../actions/syncRepositories";
 
 interface RepositorySelectorProps {
+  shouldSync: boolean;
   repositories: RepositoryListItem[];
   setRepositories: React.Dispatch<React.SetStateAction<RepositoryListItem[]>>;
   onImportComplete: () => void;
 }
 
 export default function RepositorySelector({
+  shouldSync,
   repositories,
   setRepositories,
   onImportComplete,
@@ -35,12 +36,18 @@ export default function RepositorySelector({
   ).length;
 
   useEffect(() => {
-    startImportTransition(async () => {
-      const data = await syncRepositories();
+    if (!shouldSync) return;
 
-      setRepositories(data);
-    });
-  }, []);
+    async function loadRepositories() {
+      startImportTransition(async () => {
+        const data = await syncRepositories();
+
+        setRepositories(data);
+      });
+    }
+
+    loadRepositories();
+  }, [shouldSync, setRepositories]);
 
   function toggleRepository(githubId: number) {
     setRepositories((current) =>

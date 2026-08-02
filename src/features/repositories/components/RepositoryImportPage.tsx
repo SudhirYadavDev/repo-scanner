@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import RepositorySelector from "./RepositorySelector";
 
@@ -8,6 +9,15 @@ import { RepositoryListItem } from "../types/repository";
 
 export default function RepositoryImportPage() {
   const [repositories, setRepositories] = useState<RepositoryListItem[]>([]);
+  const [shouldSync, setShouldSync] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("sync") === "true") {
+      setShouldSync(true);
+    }
+  }, [searchParams]);
 
   return (
     <div className="mt-8">
@@ -23,6 +33,7 @@ export default function RepositoryImportPage() {
         </div>
 
         <RepositorySelector
+          shouldSync={shouldSync}
           repositories={repositories}
           setRepositories={setRepositories}
           onImportComplete={() => {}}
