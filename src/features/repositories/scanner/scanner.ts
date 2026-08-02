@@ -61,21 +61,21 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.testing = detectTesting(dependencies);
 
       scanResult.quality = detectQuality(dependencies);
-
-      scanResult.environment = detectEnvironment(files);
-
-      scanResult.structure = detectStructure(files);
-
-      scanResult.packageManager = detectPackageManager(files);
-
-      scanResult.docker = detectDocker(files);
-
-      scanResult.ci = detectCI(files);
-
-      scanResult.metrics = detectProjectMetrics(files);
-
-      scanResult.security = await detectSecurity(files, scanDirectory);
     }
+
+    scanResult.environment = detectEnvironment(files);
+
+    scanResult.structure = detectStructure(files);
+
+    scanResult.packageManager = detectPackageManager(files);
+
+    scanResult.docker = detectDocker(files);
+
+    scanResult.ci = detectCI(files);
+
+    scanResult.metrics = detectProjectMetrics(files);
+
+    scanResult.security = await detectSecurity(files, scanDirectory);
 
     scanResult.score = calculateRepositoryScore(scanResult);
 

@@ -3,6 +3,7 @@ import { relative } from "node:path";
 import { readRepositoryFile } from "../readFile";
 
 import { SECURITY_PATTERNS } from "./patterns";
+import { detectGitLeaks } from "./gitLeaksScanner";
 import { SecurityIssue, SecurityScanResult } from "./types";
 
 export async function detectSecurity(
@@ -38,14 +39,28 @@ export async function detectSecurity(
           file: relative(rootDirectory, file),
           line: lineNumber + 1,
           message: pattern.message,
+          source: "Pattern Scanner",
         });
       }
     }
   }
 
+  const gitLeaksIssues = await detectGitLeaks(rootDirectory);
+
+  issues.push(...gitLeaksIssues);
+
+  const uniqueIssues = Array.from(
+    new Map(
+      issues.map((issue) => [
+        `${issue.type}-${issue.file}-${issue.line}`,
+        issue,
+      ]),
+    ).values(),
+  );
+
   let score = 100;
 
-  for (const issue of issues) {
+  for (const issue of uniqueIssues) {
     switch (issue.severity) {
       case "Critical":
         score -= 20;
@@ -65,8 +80,18 @@ export async function detectSecurity(
     }
   }
 
+  const summary = {
+    totalIssues: uniqueIssues.length,
+    critical: uniqueIssues.filter((issue) => issue.severity === "Critical")
+      .length,
+    high: uniqueIssues.filter((issue) => issue.severity === "High").length,
+    medium: uniqueIssues.filter((issue) => issue.severity === "Medium").length,
+    low: uniqueIssues.filter((issue) => issue.severity === "Low").length,
+  };
+
   return {
     score: Math.max(score, 0),
-    issues,
+    issues: uniqueIssues,
+    summary,
   };
 }

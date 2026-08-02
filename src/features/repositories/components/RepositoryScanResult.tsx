@@ -133,7 +133,7 @@ export default function RepositoryScanResult({
           </span>
         </div>
 
-        <div className="grid max-h-[420px] gap-4 overflow-y-auto pr-2 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid max-h-105 gap-4 overflow-y-auto pr-2 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(result.extensions)
             .sort(([, a], [, b]) => b - a)
             .map(([extension, count]) => {

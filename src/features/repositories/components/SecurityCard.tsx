@@ -1,16 +1,7 @@
-interface SecurityIssue {
-  type: string;
-  severity: "Critical" | "High" | "Medium" | "Low";
-  file: string;
-  line: number;
-  message: string;
-}
+import { SecurityIssue, SecurityScanResult } from "../scanner/security/types";
 
 interface SecurityCardProps {
-  security: {
-    score: number;
-    issues: SecurityIssue[];
-  };
+  security: SecurityScanResult;
 }
 
 export default function SecurityCard({ security }: SecurityCardProps) {
@@ -30,12 +21,12 @@ export default function SecurityCard({ security }: SecurityCardProps) {
     }
   };
 
-  const severityCount = {
-    Critical: 0,
-    High: 0,
-    Medium: 0,
-    Low: 0,
-  };
+  const severityCount: Record<SecurityIssue["severity"], number> = {
+  Critical: 0,
+  High: 0,
+  Medium: 0,
+  Low: 0,
+};
 
   security.issues.forEach((issue) => {
     severityCount[issue.severity]++;
