@@ -83,5 +83,13 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       biome: false,
       stylelint: false,
     },
+
+    environment: {
+      env: false,
+      envLocal: false,
+      envExample: false,
+      envDevelopment: false,
+      envProduction: false,
+    },
   };
 }

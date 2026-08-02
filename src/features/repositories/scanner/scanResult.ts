@@ -68,4 +68,12 @@ export interface RepositoryScanResult {
     biome: boolean;
     stylelint: boolean;
   };
+
+  environment: {
+    env: boolean;
+    envLocal: boolean;
+    envExample: boolean;
+    envDevelopment: boolean;
+    envProduction: boolean;
+  };
 }
