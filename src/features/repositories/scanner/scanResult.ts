@@ -15,4 +15,11 @@ export interface RepositoryScanResult {
     vue: boolean;
     angular: boolean;
   };
+
+  packageManager: {
+    npm: boolean;
+    pnpm: boolean;
+    yarn: boolean;
+    bun: boolean;
+  };
 }

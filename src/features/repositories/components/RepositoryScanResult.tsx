@@ -1,20 +1,7 @@
+import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
+
 interface RepositoryScanResultProps {
-  result: {
-    totalFiles: number;
-    totalDirectories: number;
-    totalLines: number;
-    extensions: Record<string, number>;
-    frameworks: {
-      next: boolean;
-      react: boolean;
-      prisma: boolean;
-      tailwind: boolean;
-      express: boolean;
-      nest: boolean;
-      vue: boolean;
-      angular: boolean;
-    };
-  } | null;
+  result: ScanResult | null;
 }
 
 export default function RepositoryScanResult({
@@ -37,9 +24,7 @@ export default function RepositoryScanResult({
 
           <div>
             <p className="text-sm text-gray-500">Directories</p>
-            <p className="text-2xl font-bold">
-              {result.totalDirectories}
-            </p>
+            <p className="text-2xl font-bold">{result.totalDirectories}</p>
           </div>
 
           <div>
@@ -59,6 +44,25 @@ export default function RepositoryScanResult({
               className={`border px-3 py-1 ${
                 enabled
                   ? "border-green-600 bg-green-600 text-white"
+                  : "border-gray-300 bg-gray-100 text-gray-500"
+              }`}
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="border border-gray-300 bg-white p-6">
+        <h2 className="mb-4 text-xl font-semibold">Package Manager</h2>
+
+        <div className="flex flex-wrap gap-3">
+          {Object.entries(result.packageManager).map(([name, enabled]) => (
+            <span
+              key={name}
+              className={`border px-3 py-1 ${
+                enabled
+                  ? "border-blue-600 bg-blue-600 text-white"
                   : "border-gray-300 bg-gray-100 text-gray-500"
               }`}
             >

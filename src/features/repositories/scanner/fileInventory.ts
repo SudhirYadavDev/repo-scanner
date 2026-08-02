@@ -2,9 +2,7 @@ import { dirname, extname } from "node:path";
 
 import { RepositoryScanResult } from "./scanResult";
 
-export function buildFileInventory(
-  files: string[],
-): RepositoryScanResult {
+export function buildFileInventory(files: string[]): RepositoryScanResult {
   const directories = new Set<string>();
   const extensions: Record<string, number> = {};
 
@@ -21,6 +19,7 @@ export function buildFileInventory(
     totalDirectories: directories.size,
     totalLines: 0,
     extensions,
+    
     frameworks: {
       next: false,
       react: false,
@@ -30,6 +29,13 @@ export function buildFileInventory(
       nest: false,
       vue: false,
       angular: false,
+    },
+
+    packageManager: {
+      npm: false,
+      pnpm: false,
+      yarn: false,
+      bun: false,
     },
   };
 }

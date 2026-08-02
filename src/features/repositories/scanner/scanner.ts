@@ -11,6 +11,7 @@ import { detectFrameworks } from "./frameworkDetector";
 import { findFile } from "./findFile";
 import { readPackageJson } from "./readPackageJson";
 import { RepositoryScanResult } from "./scanResult";
+import { detectPackageManager } from "./packageManagerDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -45,6 +46,8 @@ export async function runRepositoryScan(repository: Repository) {
         ...(packageData.dependencies ?? {}),
         ...(packageData.devDependencies ?? {}),
       });
+
+      scanResult.packageManager = detectPackageManager(files);
     }
 
     console.log(scanResult);
