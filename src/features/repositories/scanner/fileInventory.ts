@@ -19,7 +19,7 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
     totalDirectories: directories.size,
     totalLines: 0,
     extensions,
-    
+
     frameworks: {
       next: false,
       react: false,
@@ -36,6 +36,11 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       pnpm: false,
       yarn: false,
       bun: false,
+    },
+
+    docker: {
+      dockerfile: false,
+      compose: false,
     },
   };
 }

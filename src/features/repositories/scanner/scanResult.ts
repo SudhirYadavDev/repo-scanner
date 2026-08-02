@@ -22,4 +22,9 @@ export interface RepositoryScanResult {
     yarn: boolean;
     bun: boolean;
   };
+
+  docker: {
+    dockerfile: boolean;
+    compose: boolean;
+  };
 }

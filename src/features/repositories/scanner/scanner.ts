@@ -12,6 +12,7 @@ import { findFile } from "./findFile";
 import { readPackageJson } from "./readPackageJson";
 import { RepositoryScanResult } from "./scanResult";
 import { detectPackageManager } from "./packageManagerDetector";
+import { detectDocker } from "./dockerDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -48,6 +49,8 @@ export async function runRepositoryScan(repository: Repository) {
       });
 
       scanResult.packageManager = detectPackageManager(files);
+
+      scanResult.docker = detectDocker(files);
     }
 
     console.log(scanResult);
