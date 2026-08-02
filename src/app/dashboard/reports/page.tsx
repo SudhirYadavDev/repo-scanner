@@ -8,7 +8,7 @@ export default async function ReportsPage() {
 
   if (!cachedReport) {
     return (
-      <div className="h-full overflow-y-auto pb-8">
+      <div className="h-full overflow-y-auto pb-8 mt-5">
         <div className="rounded-3xl border border-zinc-200 bg-white p-12 text-center shadow-sm">
           <h2 className="text-2xl font-semibold text-zinc-900">
             No Report Available

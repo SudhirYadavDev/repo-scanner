@@ -9,6 +9,8 @@ import { RepositoryListItem } from "../types/repository";
 import { importRepositories } from "../actions/importRepositories";
 import { syncRepositories } from "../actions/syncRepositories";
 
+import { startOperation, finishOperation } from "@/lib/operationStatus";
+
 interface RepositorySelectorProps {
   shouldSync: boolean;
   repositories: RepositoryListItem[];
@@ -56,16 +58,24 @@ export default function RepositorySelector({
   useEffect(() => {
     async function loadRepositories() {
       if (shouldSync) {
+        startOperation("sync");
+
         startImportTransition(async () => {
-          const data = await syncRepositories();
+          try {
+            const data = await syncRepositories();
 
-          sessionStorage.setItem("githubRepositories", JSON.stringify(data));
+            sessionStorage.setItem("githubRepositories", JSON.stringify(data));
 
-          sessionStorage.setItem("lastRepoSync", new Date().toISOString());
+            sessionStorage.setItem("lastRepoSync", new Date().toISOString());
 
-          window.dispatchEvent(new Event("repo-sync"));
+            window.dispatchEvent(new Event("repo-sync"));
 
-          setRepositories(data);
+            setRepositories(data);
+          } finally {
+            setTimeout(() => {
+              finishOperation();
+            }, 800);
+          }
         });
 
         return;
@@ -114,17 +124,26 @@ export default function RepositorySelector({
   }
 
   function handleImport() {
-    startImportTransition(async () => {
-      const result = await importRepositories(repositories);
+    startOperation("import");
 
-      if (result.imported > 0) {
-        onImportComplete();
+    startImportTransition(async () => {
+      try {
+        const result = await importRepositories(repositories);
+
+        if (result.imported > 0) {
+          onImportComplete();
+        }
+      } finally {
+        setTimeout(() => {
+          finishOperation();
+        }, 800);
       }
     });
   }
 
   return (
     <div className="flex h-full min-h-0 flex-col gap-4">
+
       <div className="flex items-center justify-between gap-4">
         <RepositorySearch value={search} onChange={handleSearchChange} />
 

@@ -15,6 +15,21 @@ export default function RepositoryImportPage() {
 
   const router = useRouter();
 
+  if (!shouldSync && repositories.length === 0) {
+    return (
+      <div className="mt-5 rounded-3xl border border-zinc-200 bg-white p-12 text-center shadow-sm">
+        <h2 className="text-2xl font-semibold text-zinc-900">
+          No GitHub Repositories
+        </h2>
+
+        <p className="mt-3 text-zinc-500">
+          Sync your GitHub repositories to view and import them into Repo
+          Scanner.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <section className="mt-5 flex h-full flex-col rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
       <div className="mb-4">

@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { scanRepository } from "../actions/scanRepository";
 import { ImportedRepository } from "../types/importedRepository";
 
+import { startOperation, finishOperation } from "@/lib/operationStatus";
+
 interface ImportedRepositoryRowProps {
   repository: ImportedRepository;
 }
@@ -37,15 +39,23 @@ export default function ImportedRepositoryRow({
     };
   }, [repository.id]);
 
-  async function handleScan() {
+  function handleScan() {
+    startOperation("scan");
+
     startTransition(async () => {
-      await scanRepository(repository.id);
+      try {
+        await scanRepository(repository.id);
 
-      sessionStorage.setItem("currentReportRepositoryId", repository.id);
+        sessionStorage.setItem("currentReportRepositoryId", repository.id);
 
-      setHasReport(true);
+        setHasReport(true);
 
-      window.dispatchEvent(new Event("report-updated"));
+        window.dispatchEvent(new Event("report-updated"));
+      } finally {
+        setTimeout(() => {
+          finishOperation();
+        }, 800);
+      }
     });
   }
 
