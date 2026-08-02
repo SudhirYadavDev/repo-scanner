@@ -20,6 +20,7 @@ import { detectQuality } from "./qualityDetector";
 import { detectEnvironment } from "./environmentDetector";
 import { detectStructure } from "./structureDetector";
 import { detectProjectMetrics } from "./projectMetricsDetector";
+import { calculateRepositoryScore } from "./scoreDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -73,6 +74,8 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.metrics = detectProjectMetrics(files);
     }
 
+    scanResult.score = calculateRepositoryScore(scanResult);
+    
     console.log(scanResult);
 
     return scanResult;

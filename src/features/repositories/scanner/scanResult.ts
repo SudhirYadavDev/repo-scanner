@@ -95,4 +95,13 @@ export interface RepositoryScanResult {
   };
 
   metrics: ProjectMetrics;
+
+  score: {
+    overall: number;
+
+    rating: "Excellent" | "Good" | "Average" | "Poor";
+
+    passed: string[];
+    missing: string[];
+  };
 }

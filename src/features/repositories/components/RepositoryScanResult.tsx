@@ -2,6 +2,7 @@ import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
 
 import BadgeSection from "./BadgeSection";
 import MetricsGrid from "./MetricsGrid";
+import RepositoryScoreCard from "./RepositoryScoreCard";
 
 interface RepositoryScanResultProps {
   result: ScanResult | null;
@@ -16,6 +17,7 @@ export default function RepositoryScanResult({
 
   return (
     <div className="mt-10 space-y-6">
+      <RepositoryScoreCard score={result.score} />
       <div className="border border-gray-300 bg-white p-6">
         <h2 className="mb-4 text-xl font-semibold">Scan Summary</h2>
 

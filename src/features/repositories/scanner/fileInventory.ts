@@ -117,5 +117,12 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       reactComponents: 0,
       pages: 0,
     },
+
+    score: {
+      overall: 0,
+      rating: "Poor",
+      passed: [],
+      missing: [],
+    },
   };
 }
