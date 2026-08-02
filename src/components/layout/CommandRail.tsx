@@ -6,7 +6,6 @@ import {
   LayoutDashboard,
   FolderGit2,
   FileSearch,
-  History,
   FolderOpen,
 } from "lucide-react";
 

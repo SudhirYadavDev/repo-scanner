@@ -11,10 +11,10 @@ export default function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#f6f7fb]">
+    <div className="h-screen overflow-hidden bg-[#f6f7fb]">
       <CommandRail />
 
-      <div className="pl-36">
+      <div className="h-full pl-36">
         <PageContainer>{children}</PageContainer>
       </div>
     </div>

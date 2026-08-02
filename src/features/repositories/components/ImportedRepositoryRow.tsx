@@ -17,7 +17,6 @@ export default function ImportedRepositoryRow({
   const router = useRouter();
 
   const [isScanning, startTransition] = useTransition();
-
   const [hasReport, setHasReport] = useState(false);
 
   useEffect(() => {
@@ -39,22 +38,27 @@ export default function ImportedRepositoryRow({
   }, [repository.id]);
 
   async function handleScan() {
-  startTransition(async () => {
-    await scanRepository(repository.id);
+    startTransition(async () => {
+      await scanRepository(repository.id);
 
-    sessionStorage.setItem("currentReportRepositoryId", repository.id);
+      sessionStorage.setItem("currentReportRepositoryId", repository.id);
 
-    setHasReport(true);
+      setHasReport(true);
 
-    window.dispatchEvent(new Event("report-updated"));
-  });
-}
+      window.dispatchEvent(new Event("report-updated"));
+    });
+  }
 
   return (
-    <tr className="border-b border-gray-200">
-      <td className="px-4 py-3">{repository.fullName}</td>
+    <tr className="border-b border-zinc-200 hover:bg-zinc-50">
+      <td
+        className="truncate px-4 py-3 font-medium"
+        title={repository.fullName}
+      >
+        {repository.fullName}
+      </td>
 
-      <td className="px-4 py-3">{repository.language ?? "-"}</td>
+      <td className="truncate px-4 py-3">{repository.language ?? "-"}</td>
 
       <td className="px-4 py-3">{repository.visibility}</td>
 
@@ -66,7 +70,7 @@ export default function ImportedRepositoryRow({
         {hasReport ? (
           <button
             onClick={() => router.push("/dashboard/reports")}
-            className="rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1 text-sm text-white hover:bg-emerald-700"
+            className="w-28 rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-2 text-sm text-white transition hover:bg-emerald-700"
           >
             View Report
           </button>
@@ -74,14 +78,21 @@ export default function ImportedRepositoryRow({
           <button
             onClick={handleScan}
             disabled={isScanning}
-            className="rounded-lg border border-blue-600 bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-28 rounded-lg border border-blue-600 bg-blue-600 px-3 py-2 text-sm text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isScanning ? "Scanning..." : "Scan"}
           </button>
         )}
       </td>
 
-      <td className="px-4 py-3">
+      <td
+        className="truncate px-4 py-3 text-sm text-zinc-600"
+        title={
+          repository.lastSyncedAt
+            ? new Date(repository.lastSyncedAt).toLocaleString()
+            : "-"
+        }
+      >
         {repository.lastSyncedAt
           ? new Date(repository.lastSyncedAt).toLocaleString()
           : "-"}

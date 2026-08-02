@@ -12,40 +12,58 @@ export default function ImportedRepositoryTable({
 }: ImportedRepositoryTableProps) {
   if (repositories.length === 0) {
     return (
-      <div className="mt-10 border border-gray-300 bg-white p-8 text-center text-gray-500">
+      <div className="rounded-2xl border border-zinc-200 bg-white p-8 text-center text-zinc-500">
         No repositories have been imported yet.
       </div>
     );
   }
 
   return (
-    <div className="mt-10 border border-gray-300 bg-white">
-      <div className="border-b border-gray-300 px-5 py-3">
-        <h2 className="text-lg font-semibold">Imported Repositories</h2>
+    <div className="h-full overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+      <div className="h-full overflow-y-auto">
+        <table className="w-full table-fixed">
+          <thead className="sticky top-0 z-10 border-b border-zinc-200 bg-zinc-100">
+            <tr>
+              <th className="w-[30%] px-4 py-3 text-left font-semibold">
+                Repository
+              </th>
+
+              <th className="w-[12%] px-4 py-3 text-left font-semibold">
+                Language
+              </th>
+
+              <th className="w-[12%] px-4 py-3 text-left font-semibold">
+                Visibility
+              </th>
+
+              <th className="w-[8%] px-4 py-3 text-right font-semibold">
+                Stars
+              </th>
+
+              <th className="w-[8%] px-4 py-3 text-right font-semibold">
+                Forks
+              </th>
+
+              <th className="w-[15%] px-4 py-3 text-center font-semibold">
+                Action
+              </th>
+
+              <th className="w-[15%] px-4 py-3 text-left font-semibold">
+                Last Synced
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {repositories.map((repository) => (
+              <ImportedRepositoryRow
+                key={repository.id}
+                repository={repository}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
-
-      <table className="min-w-full">
-        <thead className="border-b border-gray-300 bg-gray-100">
-          <tr>
-            <th className="px-4 py-3 text-left">Repository</th>
-            <th className="px-4 py-3 text-left">Language</th>
-            <th className="px-4 py-3 text-left">Visibility</th>
-            <th className="px-4 py-3 text-right">Stars</th>
-            <th className="px-4 py-3 text-right">Forks</th>
-            <th className="px-4 py-3 text-center">Actions</th>
-            <th className="px-4 py-3 text-left">Last Synced</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {repositories.map((repository) => (
-            <ImportedRepositoryRow
-              key={repository.id}
-              repository={repository}
-            />
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }
