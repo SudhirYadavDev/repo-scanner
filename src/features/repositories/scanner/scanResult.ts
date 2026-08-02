@@ -1,3 +1,4 @@
+import { ProjectMetrics } from "./projectMetrics";
 export interface RepositoryScanResult {
   totalFiles: number;
   totalDirectories: number;
@@ -92,4 +93,6 @@ export interface RepositoryScanResult {
     prisma: boolean;
     tests: boolean;
   };
+
+  metrics: ProjectMetrics;
 }

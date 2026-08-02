@@ -107,5 +107,15 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       prisma: false,
       tests: false,
     },
+
+    metrics: {
+      sourceFiles: 0,
+      configFiles: 0,
+      documentationFiles: 0,
+      imageFiles: 0,
+      apiRoutes: 0,
+      reactComponents: 0,
+      pages: 0,
+    },
   };
 }

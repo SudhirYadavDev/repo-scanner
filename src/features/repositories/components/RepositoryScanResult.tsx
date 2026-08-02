@@ -206,6 +206,59 @@ export default function RepositoryScanResult({
       </div>
 
       <div className="border border-gray-300 bg-white p-6">
+        <h2 className="mb-6 text-xl font-semibold">Repository Metrics</h2>
+
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">Source Files</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.sourceFiles}
+            </p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">React Components</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.reactComponents}
+            </p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">API Routes</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.apiRoutes}
+            </p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">Pages</p>
+            <p className="mt-2 text-2xl font-bold">{result.metrics.pages}</p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">Configuration Files</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.configFiles}
+            </p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">Documentation</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.documentationFiles}
+            </p>
+          </div>
+
+          <div className="rounded border border-gray-200 p-4">
+            <p className="text-sm text-gray-500">Images</p>
+            <p className="mt-2 text-2xl font-bold">
+              {result.metrics.imageFiles}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="border border-gray-300 bg-white p-6">
         <h2 className="mb-4 text-xl font-semibold">File Extensions</h2>
 
         <table className="min-w-full">

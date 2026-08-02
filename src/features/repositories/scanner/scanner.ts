@@ -19,6 +19,7 @@ import { detectTesting } from "./testingDetector";
 import { detectQuality } from "./qualityDetector";
 import { detectEnvironment } from "./environmentDetector";
 import { detectStructure } from "./structureDetector";
+import { detectProjectMetrics } from "./projectMetricsDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -68,6 +69,8 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.docker = detectDocker(files);
 
       scanResult.ci = detectCI(files);
+
+      scanResult.metrics = detectProjectMetrics(files);
     }
 
     console.log(scanResult);
