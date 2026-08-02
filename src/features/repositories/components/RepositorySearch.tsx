@@ -13,7 +13,7 @@ export default function RepositorySearch({
       placeholder="Search repositories..."
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="mt-6 w-full border border-gray-300 bg-white px-3 py-2 outline-none"
+      className="w-1/2 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none transition"
     />
   );
 }

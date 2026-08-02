@@ -10,3 +10,12 @@ export interface GitHubRepository {
     login: string;
   };
 }
+
+export interface GitHubStats {
+  totalRepositories: number;
+  totalStars: number;
+  publicRepositories: number;
+  privateRepositories: number;
+  totalContributions: number;
+  currentYearContributions: number;
+}
