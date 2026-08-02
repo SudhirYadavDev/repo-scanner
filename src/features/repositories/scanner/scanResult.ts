@@ -76,4 +76,20 @@ export interface RepositoryScanResult {
     envDevelopment: boolean;
     envProduction: boolean;
   };
+
+  structure: {
+    src: boolean;
+    app: boolean;
+    pages: boolean;
+    components: boolean;
+    hooks: boolean;
+    services: boolean;
+    lib: boolean;
+    utils: boolean;
+    middleware: boolean;
+    public: boolean;
+    assets: boolean;
+    prisma: boolean;
+    tests: boolean;
+  };
 }

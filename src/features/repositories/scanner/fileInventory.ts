@@ -91,5 +91,21 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       envDevelopment: false,
       envProduction: false,
     },
+
+    structure: {
+      src: false,
+      app: false,
+      pages: false,
+      components: false,
+      hooks: false,
+      services: false,
+      lib: false,
+      utils: false,
+      middleware: false,
+      public: false,
+      assets: false,
+      prisma: false,
+      tests: false,
+    },
   };
 }

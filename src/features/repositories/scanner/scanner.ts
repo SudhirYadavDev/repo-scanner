@@ -18,6 +18,7 @@ import { detectDatabase } from "./databaseDetector";
 import { detectTesting } from "./testingDetector";
 import { detectQuality } from "./qualityDetector";
 import { detectEnvironment } from "./environmentDetector";
+import { detectStructure } from "./structureDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -59,6 +60,8 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.quality = detectQuality(dependencies);
 
       scanResult.environment = detectEnvironment(files);
+
+      scanResult.structure = detectStructure(files);
 
       scanResult.packageManager = detectPackageManager(files);
 
