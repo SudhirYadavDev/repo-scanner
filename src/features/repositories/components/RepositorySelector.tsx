@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
+
+import { syncRepositories } from "../actions/syncRepositories";
 
 import RepositorySearch from "./RepositorySearch";
 import RepositoryTable from "./RepositoryTable";
@@ -31,6 +33,14 @@ export default function RepositorySelector({
   const selectedCount = repositories.filter(
     (repository) => repository.selected,
   ).length;
+
+  useEffect(() => {
+    startImportTransition(async () => {
+      const data = await syncRepositories();
+
+      setRepositories(data);
+    });
+  }, []);
 
   function toggleRepository(githubId: number) {
     setRepositories((current) =>

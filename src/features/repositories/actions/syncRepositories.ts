@@ -30,7 +30,5 @@ export async function syncRepositories() {
 
   const repositories = await getUserRepositories(account.accessToken);
 
-  console.log(repositories);
-
   return repositories.map(mapGitHubRepository);
 }

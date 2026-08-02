@@ -1,37 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 import { useSession } from "@/lib/auth-client";
 
-import { syncRepositories } from "@/features/repositories/actions/syncRepositories";
-import { RepositoryListItem } from "@/features/repositories/types/repository";
-
-interface TopBarProps {
-  onSyncComplete: (
-    repositories: RepositoryListItem[],
-  ) => void;
-}
-
-export default function TopBar({
-  onSyncComplete,
-}: TopBarProps) {
+export default function TopBar() {
   const { data } = useSession();
 
-  const [isSyncing, startTransition] = useTransition();
-
-  function handleSync() {
-    startTransition(async () => {
-      const repositories = await syncRepositories();
-
-      onSyncComplete(repositories);
-    });
-  }
+  const router = useRouter();
 
   return (
-    <header className="pt-16">
-      <div className="mx-auto flex max-w-6xl items-center justify-between rounded-3xl border border-zinc-200 bg-white px-12 py-12 shadow-sm">
+    <header className="sticky top-0 z-50">
+      <div className="mx-auto flex max-w-6xl items-center justify-between rounded-3xl border border-zinc-200 bg-white px-12 py-8 shadow-sm">
         <div className="flex items-center gap-10">
           {data?.user.image ? (
             <Image
@@ -42,7 +23,7 @@ export default function TopBar({
               className="rounded-full border-4 border-zinc-100 shadow-md"
             />
           ) : (
-            <div className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-4 border-zinc-100 bg-zinc-100 text-5xl font-bold text-zinc-400">
+            <div className="flex h-37.5 w-37.5 items-center justify-center rounded-full border-4 border-zinc-100 bg-zinc-100 text-5xl font-bold text-zinc-400">
               {data?.user.name?.charAt(0) ?? "U"}
             </div>
           )}
@@ -56,7 +37,7 @@ export default function TopBar({
               {data?.user.email}
             </p>
 
-            <div className="mt-8">
+            <div className="mt-6">
               <h2 className="text-2xl font-semibold text-zinc-900">
                 Repo Scanner
               </h2>
@@ -70,11 +51,10 @@ export default function TopBar({
         </div>
 
         <button
-          onClick={handleSync}
-          disabled={isSyncing}
-          className="rounded-2xl bg-zinc-900 px-8 py-5 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
+          onClick={() => router.push("/dashboard/repositories")}
+          className="rounded-2xl bg-zinc-900 px-8 py-5 text-sm font-medium text-white transition hover:bg-zinc-800"
         >
-          {isSyncing ? "Syncing..." : "Sync Repositories"}
+          Sync Repositories
         </button>
       </div>
     </header>

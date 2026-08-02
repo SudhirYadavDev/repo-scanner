@@ -1,26 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import TopBar from "@/components/layout/TopBar";
+import ProfileStats from "./ProfileStats";
 
-import RepositoryDashboard from "./RepositoryDashboard";
-
-import { RepositoryListItem } from "../types/repository";
+import { getGithubStats } from "../actions/getGithubStats";
 
 export default function DashboardClient() {
-  const [githubRepositories, setGithubRepositories] = useState<
-    RepositoryListItem[]
-  >([]);
+  const [stats, setStats] = useState({
+    totalRepositories: 0,
+    totalStars: 0,
+    publicRepositories: 0,
+    privateRepositories: 0,
+    totalContributions: 0,
+    currentYearContributions: 0,
+  });
+
+  useEffect(() => {
+    async function loadStats() {
+      const data = await getGithubStats();
+      setStats(data);
+    }
+
+    loadStats();
+  }, []);
 
   return (
-    <>
-      <TopBar onSyncComplete={setGithubRepositories} />
+    <div className="space-y-6 py-6">
+      <TopBar />
 
-      <RepositoryDashboard
-        githubRepositories={githubRepositories}
-        setGithubRepositories={setGithubRepositories}
-      />
-    </>
+      <ProfileStats stats={stats} />
+    </div>
   );
 }

@@ -2,26 +2,14 @@
 
 import { useCallback, useEffect, useState, useTransition } from "react";
 
-import RepositorySelector from "./RepositorySelector";
 import ImportedRepositoryTable from "./ImportedRepositoryTable";
 import RepositoryScanResult from "./RepositoryScanResult";
 
 import { getRepositories } from "../actions/getRepositories";
 import { ImportedRepository } from "../types/importedRepository";
-import { RepositoryListItem } from "../types/repository";
 import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
 
-interface RepositoryDashboardProps {
-  githubRepositories: RepositoryListItem[];
-  setGithubRepositories: React.Dispatch<
-    React.SetStateAction<RepositoryListItem[]>
-  >;
-}
-
-export default function RepositoryDashboard({
-  githubRepositories,
-  setGithubRepositories,
-}: RepositoryDashboardProps) {
+export default function RepositoryDashboard() {
   const [repositories, setRepositories] = useState<ImportedRepository[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -43,25 +31,7 @@ export default function RepositoryDashboard({
   }, [loadRepositories]);
 
   return (
-    <div className="mt-14 space-y-12">
-      <section className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-zinc-900">
-            Repository Import
-          </h2>
-
-          <p className="mt-2 text-sm text-zinc-500">
-            Sync your GitHub repositories and choose which projects to analyze.
-          </p>
-        </div>
-
-        <RepositorySelector
-          repositories={githubRepositories}
-          setRepositories={setGithubRepositories}
-          onImportComplete={loadRepositories}
-        />
-      </section>
-
+    <div className="mt-8 space-y-12">
       <section className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-zinc-900">
