@@ -37,18 +37,25 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
   ];
 
   return (
-    <div className="border border-gray-300 bg-white p-6">
-      <h2 className="mb-6 text-xl font-semibold">Repository Metrics</h2>
+    <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <h2 className="mb-6 text-xl font-semibold text-zinc-900">
+        Repository Metrics
+      </h2>
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
-          <div key={card.title} className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">{card.title}</p>
+          <div
+            key={card.title}
+            className="rounded-xl border border-zinc-200 bg-zinc-50 p-5"
+          >
+            <p className="text-sm text-zinc-500">{card.title}</p>
 
-            <p className="mt-2 text-2xl font-bold">{card.value}</p>
+            <p className="mt-3 text-3xl font-black text-zinc-900">
+              {card.value}
+            </p>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
