@@ -5,20 +5,20 @@ import { useMemo, useState, useTransition } from "react";
 import RepositorySearch from "./RepositorySearch";
 import RepositoryTable from "./RepositoryTable";
 
-import { syncRepositories } from "../actions/syncRepositories";
 import { RepositoryListItem } from "../types/repository";
-
 import { importRepositories } from "../actions/importRepositories";
 
 interface RepositorySelectorProps {
+  repositories: RepositoryListItem[];
+  setRepositories: React.Dispatch<React.SetStateAction<RepositoryListItem[]>>;
   onImportComplete: () => void;
 }
 
 export default function RepositorySelector({
+  repositories,
+  setRepositories,
   onImportComplete,
 }: RepositorySelectorProps) {
-  const [repositories, setRepositories] = useState<RepositoryListItem[]>([]);
-  const [isSyncing, startTransition] = useTransition();
   const [search, setSearch] = useState("");
   const [isImporting, startImportTransition] = useTransition();
 
@@ -31,13 +31,6 @@ export default function RepositorySelector({
   const selectedCount = repositories.filter(
     (repository) => repository.selected,
   ).length;
-
-  function handleSync() {
-    startTransition(async () => {
-      const repos = await syncRepositories();
-      setRepositories(repos);
-    });
-  }
 
   function toggleRepository(githubId: number) {
     setRepositories((current) =>
@@ -80,15 +73,7 @@ export default function RepositorySelector({
   }
 
   return (
-    <div className="mt-10">
-      <button
-        onClick={handleSync}
-        disabled={isSyncing}
-        className="border border-green-600 bg-green-600 px-5 py-3 text-white transition hover:bg-green-700 disabled:cursor-not-allowed"
-      >
-        {isSyncing ? "Syncing..." : "Sync GitHub Repositories"}
-      </button>
-
+    <div className="mt-10 space-y-6">
       <RepositorySearch value={search} onChange={setSearch} />
 
       <RepositoryTable
@@ -97,13 +82,13 @@ export default function RepositorySelector({
         onToggleAll={toggleAllRepositories}
       />
 
-      <div className="mt-4 flex items-center justify-between">
-        <p className="text-sm text-gray-600">{selectedCount} selected</p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-zinc-500">{selectedCount} selected</p>
 
         <button
           onClick={handleImport}
           disabled={selectedCount === 0 || isImporting}
-          className="border border-green-600 bg-green-600 px-4 py-2 text-white"
+          className="rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isImporting ? "Importing..." : "Import Selected"}
         </button>
