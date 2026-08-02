@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import RepositorySelector from "./RepositorySelector";
 
@@ -12,6 +13,7 @@ export default function RepositoryImportPage() {
 
   const searchParams = useSearchParams();
   const shouldSync = searchParams.get("sync") === "true";
+  const router = useRouter();
 
   return (
     <div className="mt-8">
@@ -30,7 +32,9 @@ export default function RepositoryImportPage() {
           shouldSync={shouldSync}
           repositories={repositories}
           setRepositories={setRepositories}
-          onImportComplete={() => {}}
+          onImportComplete={() => {
+            router.push("/dashboard/imported");
+          }}
         />
       </section>
     </div>

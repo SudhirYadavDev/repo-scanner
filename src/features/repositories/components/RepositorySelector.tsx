@@ -97,9 +97,11 @@ export default function RepositorySelector({
 
   function handleImport() {
     startImportTransition(async () => {
-      await importRepositories(repositories);
+      const result = await importRepositories(repositories);
 
-      onImportComplete();
+      if (result.imported > 0) {
+        onImportComplete();
+      }
     });
   }
 

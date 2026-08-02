@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderGit2, FileSearch, History } from "lucide-react";
+import {
+  LayoutDashboard,
+  FolderGit2,
+  FileSearch,
+  History,
+  FolderOpen,
+} from "lucide-react";
 
 const navigation = [
   {
@@ -14,6 +20,11 @@ const navigation = [
     title: "Repositories",
     href: "/dashboard/repositories",
     icon: FolderGit2,
+  },
+  {
+    title: "Imported",
+    href: "/dashboard/imported",
+    icon: FolderOpen,
   },
   {
     title: "Reports",
