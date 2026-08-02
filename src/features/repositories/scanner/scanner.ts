@@ -13,6 +13,7 @@ import { readPackageJson } from "./readPackageJson";
 import { RepositoryScanResult } from "./scanResult";
 import { detectPackageManager } from "./packageManagerDetector";
 import { detectDocker } from "./dockerDetector";
+import { detectCI } from "./ciDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -51,6 +52,8 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.packageManager = detectPackageManager(files);
 
       scanResult.docker = detectDocker(files);
+
+      scanResult.ci = detectCI(files);
     }
 
     console.log(scanResult);

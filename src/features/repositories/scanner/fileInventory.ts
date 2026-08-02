@@ -42,5 +42,14 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       dockerfile: false,
       compose: false,
     },
+
+    ci: {
+      githubActions: false,
+      gitlab: false,
+      jenkins: false,
+      circleCi: false,
+      azurePipelines: false,
+      travis: false,
+    },
   };
 }

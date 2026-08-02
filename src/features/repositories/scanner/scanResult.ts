@@ -27,4 +27,13 @@ export interface RepositoryScanResult {
     dockerfile: boolean;
     compose: boolean;
   };
+
+  ci: {
+    githubActions: boolean;
+    gitlab: boolean;
+    jenkins: boolean;
+    circleCi: boolean;
+    azurePipelines: boolean;
+    travis: boolean;
+  };
 }
