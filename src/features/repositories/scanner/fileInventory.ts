@@ -118,6 +118,11 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       pages: 0,
     },
 
+    security: {
+      score: 100,
+      issues: [],
+    },
+
     score: {
       overall: 0,
       rating: "Poor",

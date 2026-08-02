@@ -21,6 +21,7 @@ import { detectEnvironment } from "./environmentDetector";
 import { detectStructure } from "./structureDetector";
 import { detectProjectMetrics } from "./projectMetricsDetector";
 import { calculateRepositoryScore } from "./scoreDetector";
+import { detectSecurity } from "./security/detector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -72,10 +73,12 @@ export async function runRepositoryScan(repository: Repository) {
       scanResult.ci = detectCI(files);
 
       scanResult.metrics = detectProjectMetrics(files);
+
+      scanResult.security = await detectSecurity(files, scanDirectory);
     }
 
     scanResult.score = calculateRepositoryScore(scanResult);
-    
+
     console.log(scanResult);
 
     return scanResult;

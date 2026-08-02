@@ -1,4 +1,5 @@
 import { ProjectMetrics } from "./projectMetrics";
+import { SecurityScanResult } from "./security/types";
 export interface RepositoryScanResult {
   totalFiles: number;
   totalDirectories: number;
@@ -95,6 +96,8 @@ export interface RepositoryScanResult {
   };
 
   metrics: ProjectMetrics;
+
+   security: SecurityScanResult;
 
   score: {
     overall: number;
