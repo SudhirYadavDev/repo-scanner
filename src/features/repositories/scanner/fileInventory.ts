@@ -51,5 +51,17 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       azurePipelines: false,
       travis: false,
     },
+
+    database: {
+      postgres: false,
+      mysql: false,
+      mariadb: false,
+      mongodb: false,
+      sqlite: false,
+      redis: false,
+      prisma: false,
+      drizzle: false,
+      mongoose: false,
+    },
   };
 }

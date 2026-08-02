@@ -36,4 +36,16 @@ export interface RepositoryScanResult {
     azurePipelines: boolean;
     travis: boolean;
   };
+
+  database: {
+    postgres: boolean;
+    mysql: boolean;
+    mariadb: boolean;
+    mongodb: boolean;
+    sqlite: boolean;
+    redis: boolean;
+    prisma: boolean;
+    drizzle: boolean;
+    mongoose: boolean;
+  };
 }

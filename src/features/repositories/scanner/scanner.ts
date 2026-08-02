@@ -14,6 +14,7 @@ import { RepositoryScanResult } from "./scanResult";
 import { detectPackageManager } from "./packageManagerDetector";
 import { detectDocker } from "./dockerDetector";
 import { detectCI } from "./ciDetector";
+import { detectDatabase } from "./databaseDetector";
 
 export async function runRepositoryScan(repository: Repository) {
   const account = await db.account.findFirst({
@@ -27,10 +28,7 @@ export async function runRepositoryScan(repository: Repository) {
     throw new Error("GitHub access token not found.");
   }
 
-  const scanDirectory = await cloneRepository(
-    repository,
-    account.accessToken
-  );
+  const scanDirectory = await cloneRepository(repository, account.accessToken);
 
   try {
     const files = await collectFiles(scanDirectory);
@@ -44,10 +42,14 @@ export async function runRepositoryScan(repository: Repository) {
     if (packageJson) {
       const packageData = await readPackageJson(packageJson);
 
-      scanResult.frameworks = detectFrameworks({
+      const dependencies = {
         ...(packageData.dependencies ?? {}),
         ...(packageData.devDependencies ?? {}),
-      });
+      };
+
+      scanResult.frameworks = detectFrameworks(dependencies);
+
+      scanResult.database = detectDatabase(dependencies);
 
       scanResult.packageManager = detectPackageManager(files);
 
