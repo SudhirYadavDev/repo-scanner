@@ -62,19 +62,19 @@ export async function getGithubStats() {
       },
       body: JSON.stringify({
         query: `
-            query($from: DateTime!, $to: DateTime!) {
-              viewer {
-                contributionsCollection(
-                  from: $from,
-                  to: $to
-                ) {
-                  contributionCalendar {
-                    totalContributions
-                  }
+          query($from: DateTime!, $to: DateTime!) {
+            viewer {
+              contributionsCollection(
+                from: $from,
+                to: $to
+              ) {
+                contributionCalendar {
+                  totalContributions
                 }
               }
             }
-          `,
+          }
+        `,
         variables: {
           from: `${year}-01-01T00:00:00Z`,
           to: `${year}-12-31T23:59:59Z`,
@@ -147,7 +147,7 @@ export async function getGithubStats() {
     0,
   );
 
-  return {
+  const stats = {
     totalRepositories:
       profile.public_repos + (profile.total_private_repos ?? 0),
 
@@ -161,4 +161,16 @@ export async function getGithubStats() {
 
     currentYearContributions,
   };
+
+  await db.user.update({
+    where: {
+      id: session.user.id,
+    },
+    data: {
+      ...stats,
+      statsUpdatedAt: new Date(),
+    },
+  });
+
+  return stats;
 }

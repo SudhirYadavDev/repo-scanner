@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 
 import { getUserRepositories } from "../services/github";
 import { mapGitHubRepository } from "../mappers/mapper";
+import { getGithubStats } from "./getGithubStats";
 
 export async function syncRepositories() {
   const session = await auth.api.getSession({
@@ -30,5 +31,9 @@ export async function syncRepositories() {
 
   const repositories = await getUserRepositories(account.accessToken);
 
-  return repositories.map(mapGitHubRepository);
+  const mappedRepositories = repositories.map(mapGitHubRepository);
+
+  await getGithubStats();
+
+  return mappedRepositories;
 }

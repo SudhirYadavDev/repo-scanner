@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import TopBar from "@/components/layout/TopBar";
 import ProfileStats from "./ProfileStats";
 
-import { getGithubStats } from "../actions/getGithubStats";
+import { getCachedGithubStats } from "../actions/getCachedGithubStats";
 
 export default function DashboardClient() {
   const [stats, setStats] = useState({
@@ -19,7 +19,7 @@ export default function DashboardClient() {
 
   useEffect(() => {
     async function loadStats() {
-      const data = await getGithubStats();
+      const data = await getCachedGithubStats();
       setStats(data);
     }
 
