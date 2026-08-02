@@ -58,4 +58,14 @@ export interface RepositoryScanResult {
     chai: boolean;
     testingLibrary: boolean;
   };
+
+  quality: {
+    eslint: boolean;
+    prettier: boolean;
+    husky: boolean;
+    lintStaged: boolean;
+    commitlint: boolean;
+    biome: boolean;
+    stylelint: boolean;
+  };
 }

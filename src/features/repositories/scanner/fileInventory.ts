@@ -73,5 +73,15 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
       chai: false,
       testingLibrary: false,
     },
+
+    quality: {
+      eslint: false,
+      prettier: false,
+      husky: false,
+      lintStaged: false,
+      commitlint: false,
+      biome: false,
+      stylelint: false,
+    },
   };
 }
