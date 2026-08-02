@@ -8,6 +8,8 @@ import { db } from "@/lib/db";
 import { runRepositoryScan } from "../scanner/scanner";
 import { RepositoryScanResult } from "../scanner/scanResult";
 
+import { saveCachedReport } from "../cache/reportCache";
+
 export async function scanRepository(
   repositoryId: string,
 ): Promise<RepositoryScanResult> {
@@ -30,5 +32,14 @@ export async function scanRepository(
     throw new Error("Repository not found.");
   }
 
-  return await runRepositoryScan(repository);
+  const report = await runRepositoryScan(repository);
+
+  saveCachedReport({
+    repositoryId: repository.id,
+    repositoryName: repository.fullName,
+    scannedAt: new Date(),
+    report,
+  });
+
+  return report;
 }

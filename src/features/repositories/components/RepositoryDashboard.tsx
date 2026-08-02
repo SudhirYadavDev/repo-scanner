@@ -3,19 +3,15 @@
 import { useCallback, useEffect, useState, useTransition } from "react";
 
 import ImportedRepositoryTable from "./ImportedRepositoryTable";
-import RepositoryScanResult from "./RepositoryScanResult";
 
 import { getRepositories } from "../actions/getRepositories";
 import { ImportedRepository } from "../types/importedRepository";
-import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
 
 export default function RepositoryDashboard() {
   const [repositories, setRepositories] = useState<ImportedRepository[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isPending, startTransition] = useTransition();
-
-  const [scanResult, setScanResult] = useState<ScanResult | null>(null);
 
   const loadRepositories = useCallback(() => {
     startTransition(async () => {
@@ -48,28 +44,9 @@ export default function RepositoryDashboard() {
             Loading imported repositories...
           </div>
         ) : (
-          <ImportedRepositoryTable
-            repositories={repositories}
-            onScanComplete={setScanResult}
-          />
+          <ImportedRepositoryTable repositories={repositories} />
         )}
       </section>
-
-      {scanResult && (
-        <section className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-zinc-900">
-              Repository Analysis
-            </h2>
-
-            <p className="mt-2 text-sm text-zinc-500">
-              Technical breakdown, score and repository insights.
-            </p>
-          </div>
-
-          <RepositoryScanResult result={scanResult} />
-        </section>
-      )}
     </div>
   );
 }

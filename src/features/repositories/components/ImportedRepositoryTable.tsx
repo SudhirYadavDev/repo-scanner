@@ -3,16 +3,12 @@
 import { ImportedRepository } from "../types/importedRepository";
 import ImportedRepositoryRow from "./ImportedRepositoryRow";
 
-import { RepositoryScanResult } from "../scanner/scanResult";
-
 interface ImportedRepositoryTableProps {
   repositories: ImportedRepository[];
-  onScanComplete: (result: RepositoryScanResult) => void;
 }
 
 export default function ImportedRepositoryTable({
   repositories,
-  onScanComplete,
 }: ImportedRepositoryTableProps) {
   if (repositories.length === 0) {
     return (
@@ -46,7 +42,6 @@ export default function ImportedRepositoryTable({
             <ImportedRepositoryRow
               key={repository.id}
               repository={repository}
-              onScanComplete={onScanComplete}
             />
           ))}
         </tbody>

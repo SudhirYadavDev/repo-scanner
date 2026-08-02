@@ -31,11 +31,6 @@ const navigation = [
     href: "/dashboard/reports",
     icon: FileSearch,
   },
-  {
-    title: "History",
-    href: "/dashboard/history",
-    icon: History,
-  },
 ];
 
 export default function CommandRail() {
