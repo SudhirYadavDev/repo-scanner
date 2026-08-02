@@ -1,5 +1,8 @@
 import { RepositoryScanResult as ScanResult } from "../scanner/scanResult";
 
+import BadgeSection from "./BadgeSection";
+import MetricsGrid from "./MetricsGrid";
+
 interface RepositoryScanResultProps {
   result: ScanResult | null;
 }
@@ -34,229 +37,49 @@ export default function RepositoryScanResult({
         </div>
       </div>
 
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Detected Frameworks</h2>
+      <BadgeSection
+        title="Detected Frameworks"
+        items={result.frameworks}
+        color="green"
+      />
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.frameworks).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <BadgeSection
+        title="Package Manager"
+        items={result.packageManager}
+        color="blue"
+      />
 
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Package Manager</h2>
+      <BadgeSection title="Docker" items={result.docker} color="blue" />
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.packageManager).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <BadgeSection title="CI / CD" items={result.ci} color="purple" />
 
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Docker</h2>
+      <BadgeSection
+        title="Database & ORM"
+        items={result.database}
+        color="green"
+      />
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.docker).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <BadgeSection title="Testing" items={result.testing} color="orange" />
 
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">CI / CD</h2>
+      <BadgeSection
+        title="Code Quality"
+        items={result.quality}
+        color="purple"
+      />
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.ci).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <BadgeSection
+        title="Environment Files"
+        items={result.environment}
+        color="blue"
+      />
 
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Database & ORM</h2>
+      <BadgeSection
+        title="Project Structure"
+        items={result.structure}
+        color="green"
+      />
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.database).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Testing</h2>
-
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.testing).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Code Quality</h2>
-
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.quality).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Environment Files</h2>
-
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.environment).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-4 text-xl font-semibold">Project Structure</h2>
-
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(result.structure).map(([name, enabled]) => (
-            <span
-              key={name}
-              className={`border px-3 py-1 ${
-                enabled
-                  ? "border-green-600 bg-green-600 text-white"
-                  : "border-gray-300 bg-gray-100 text-gray-500"
-              }`}
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="border border-gray-300 bg-white p-6">
-        <h2 className="mb-6 text-xl font-semibold">Repository Metrics</h2>
-
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Source Files</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.sourceFiles}
-            </p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">React Components</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.reactComponents}
-            </p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">API Routes</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.apiRoutes}
-            </p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Pages</p>
-            <p className="mt-2 text-2xl font-bold">{result.metrics.pages}</p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Configuration Files</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.configFiles}
-            </p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Documentation</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.documentationFiles}
-            </p>
-          </div>
-
-          <div className="rounded border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Images</p>
-            <p className="mt-2 text-2xl font-bold">
-              {result.metrics.imageFiles}
-            </p>
-          </div>
-        </div>
-      </div>
+      <MetricsGrid metrics={result.metrics} />
 
       <div className="border border-gray-300 bg-white p-6">
         <h2 className="mb-4 text-xl font-semibold">File Extensions</h2>
