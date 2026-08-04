@@ -164,12 +164,4 @@ Repo Scanner was built to simplify understanding large codebases by automaticall
 
 ---
 
-## 👨‍💻 Author
-
-Built by **Your Name**
-
-GitHub: https://github.com/your-username
-
----
-
 ⭐ If you find this project useful, consider giving it a star!
