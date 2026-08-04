@@ -1,36 +1,175 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Repo Scanner 🚀
 
-## Getting Started
+A GitHub repository analysis platform that automatically scans repositories, detects technologies, analyzes security risks, and generates engineering reports.
 
-First, run the development server:
+🔗 **Live Demo:** https://your-live-link.com
+
+---
+
+## 📌 Overview
+
+Repo Scanner helps developers understand their codebases faster by providing automated repository insights.
+
+Connect your GitHub account, select repositories, and get detailed analysis including:
+
+- Repository health score
+- Technology detection
+- Security analysis
+- Engineering setup insights
+- Repository metrics
+- File distribution reports
+
+---
+
+## ✨ Features
+
+### 🔍 Repository Analysis
+- Import GitHub repositories
+- Select specific repositories to analyze
+- Scan repository structure and files
+- Detect frameworks, databases, package managers, and tools
+
+### 🛡️ Security Analysis
+- Static security scanning
+- Detect potential security issues
+- Categorize vulnerabilities by severity
+
+### 📊 Engineering Reports
+- Repository health scoring
+- Technology breakdown
+- Code structure insights
+- Downloadable PDF reports
+
+### 📈 Dashboard
+- Repository overview
+- Imported repository management
+- Scan history and reports
+
+---
+
+## 🖥️ Screenshots
+
+### Dashboard
+
+<img src="./public/screenshots/dashboard.webp" alt="Dashboard" width="900"/>
+
+---
+
+### Repository Selection
+
+<img src="./public/screenshots/repository.webp" alt="Repository Selection" width="900"/>
+
+---
+
+### Imported Repositories
+
+<img src="./public/screenshots/imported.webp" alt="Imported Repositories" width="900"/>
+
+---
+
+### Repository Report
+
+<img src="./public/screenshots/report.webp" alt="Repository Report" width="900"/>
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+### Backend / Database
+- Next.js Server Actions
+- Prisma ORM
+- PostgreSQL
+
+### Authentication
+- GitHub OAuth
+- Better Auth
+
+### Other Tools
+- GitHub API
+- PDF Report Generation
+
+---
+
+## ⚙️ Running Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/repo-scanner.git
+```
+
+Navigate into the project:
+
+```bash
+cd repo-scanner
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
+
+Run database migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📂 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src
+├── app
+├── components
+├── features
+│   └── repositories
+├── lib
+└── utils
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Purpose
 
-## Deploy on Vercel
+Repo Scanner was built to simplify understanding large codebases by automatically collecting important repository information and presenting it in a clean engineering-focused dashboard.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 Author
+
+Built by **Your Name**
+
+GitHub: https://github.com/your-username
+
+---
+
+⭐ If you find this project useful, consider giving it a star!
