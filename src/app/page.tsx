@@ -1,14 +1,8 @@
 import LandingPage from "@/components/home/LandingPage";
-
-import { getVisitCount } from "@/features/visits/actions/getVisitCount";
+import { incrementWebsiteVisits } from "./actions/websiteVisits";
 
 export default async function HomePage() {
-  const { visits, showCounter } = await getVisitCount();
+  await incrementWebsiteVisits();
 
-  return (
-    <LandingPage
-      visits={visits}
-      showCounter={showCounter}
-    />
-  );
+  return <LandingPage />;
 }
