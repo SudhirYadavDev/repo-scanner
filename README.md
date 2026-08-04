@@ -2,7 +2,7 @@
 
 A GitHub repository analysis platform that automatically scans repositories, detects technologies, analyzes security risks, and generates engineering reports.
 
-🔗 **Live Demo:** https://your-live-link.com
+🔗 **Live :** https://repo-scanner-iota.vercel.app
 
 ---
 
