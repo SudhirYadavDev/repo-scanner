@@ -29,6 +29,7 @@ export async function cloneRepository(
 
   const cloneUrl = `https://${accessToken}@github.com/${repository.fullName}.git`;
 
+  try {
   await execFileAsync("git", [
     "clone",
     "--depth",
@@ -36,6 +37,11 @@ export async function cloneRepository(
     cloneUrl,
     scanDirectory,
   ]);
+} catch (error) {
+  console.error("Git failed:");
+  console.error(error);
+  throw error;
+}
 
   console.log("Repository cloned successfully.");
 
