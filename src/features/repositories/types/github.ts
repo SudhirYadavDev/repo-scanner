@@ -19,3 +19,24 @@ export interface GitHubStats {
   totalContributions: number;
   currentYearContributions: number;
 }
+
+export interface GitHubTreeResponse {
+  tree: GitHubTreeItem[];
+}
+
+export interface GitHubTreeItem {
+  path: string;
+  mode: string;
+  type: "blob" | "tree";
+  sha: string;
+  size?: number;
+  url: string;
+}
+
+export interface GitHubContentResponse {
+  type: "file";
+  encoding: "base64";
+  content: string;
+  path: string;
+  size: number;
+}
