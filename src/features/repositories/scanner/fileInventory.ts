@@ -120,7 +120,16 @@ export function buildFileInventory(files: string[]): RepositoryScanResult {
 
     security: {
       score: 100,
+
       issues: [],
+
+      summary: {
+        totalIssues: 0,
+        critical: 0,
+        high: 0,
+        medium: 0,
+        low: 0,
+      },
     },
 
     score: {

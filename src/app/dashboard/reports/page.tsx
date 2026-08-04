@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import RepositoryScanResult from "@/features/repositories/components/RepositoryScanResult";
 import DownloadReportButton from "@/features/repositories/components/DownloadReportButton";
 
