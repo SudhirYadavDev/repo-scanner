@@ -36,7 +36,10 @@ export async function detectGitLeaks(
         maxBuffer: 1024 * 1024 * 10,
       },
     );
-  } catch {}
+  } catch (error) {
+  console.error("GitLeaks failed:");
+  console.error(error);
+}
 
   try {
     const file = await import("node:fs/promises");
