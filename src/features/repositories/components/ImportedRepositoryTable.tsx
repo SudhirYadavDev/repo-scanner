@@ -32,7 +32,7 @@ export default function ImportedRepositoryTable({
     <div className="h-full overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
       <div className="h-full overflow-y-auto">
         <table className="w-full table-fixed">
-          <thead className="sticky top-0 z-10 border-b border-zinc-200 bg-gradient-to-b from-zinc-50 to-zinc-100 backdrop-blur">
+          <thead className="sticky top-0 z-10 border-b border-zinc-200 bg-linear-to-b from-zinc-50 to-zinc-100 backdrop-blur">
             <tr className="text-zinc-700">
               <th className="w-[32%] px-4 py-4 text-left">
                 <div className="flex items-center gap-2 font-semibold">

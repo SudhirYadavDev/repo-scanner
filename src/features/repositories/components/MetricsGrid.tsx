@@ -85,7 +85,7 @@ export default function MetricsGrid({ metrics }: MetricsGridProps) {
           return (
             <div
               key={card.title}
-              className="group rounded-2xl border border-zinc-200 bg-gradient-to-br from-white to-zinc-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
+              className="group rounded-2xl border border-zinc-200 bg-linear-to-br from-white to-zinc-50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
             >
               <div className="flex items-center justify-between">
                 <div
