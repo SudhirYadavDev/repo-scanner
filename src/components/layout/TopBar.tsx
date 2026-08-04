@@ -67,7 +67,7 @@ export default function TopBar() {
                   },
                 });
               }}
-              className="mt-6 rounded-xl border border-red-200 bg-red-50 px-6 py-3 text-sm font-semibold text-red-600 cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-600 hover:text-white hover:shadow-lg"
+              className="mt-6 rounded-xl border border-red-200 bg-red-50 px-6 py-3 text-sm font-semibold text-red-600 cursor-pointertransition-all duration-300 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-600 hover:text-white hover:shadow-lg"
             >
               Logout
             </button>
@@ -101,9 +101,9 @@ export default function TopBar() {
               sessionStorage.setItem("allowRepoSync", "true");
               router.push("/dashboard/repositories?sync=true");
             }}
-            className="group relative overflow-hidden rounded-2xl bg-linear-to-r from-zinc-900 to-zinc-800 px-8 py-5 text-sm font-semibold text-white shadow-md cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-900 to-zinc-800 px-8 py-5 text-sm font-semibold text-white shadow-md cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
             <span className="relative flex items-center gap-2">
               <RefreshCw

@@ -10,7 +10,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="h-screen overflow-hidden bg-[#f6f7fb]">
+    <div className="h-screen overflow-hidden bg-[#ecfff0]">
       <CommandRail />
 
       <div className="h-full pl-36">
