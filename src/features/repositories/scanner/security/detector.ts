@@ -45,7 +45,13 @@ export async function detectSecurity(
     }
   }
 
-  const gitLeaksIssues = await detectGitLeaks(rootDirectory);
+  let gitLeaksIssues: SecurityIssue[] = [];
+
+  try {
+    gitLeaksIssues = await detectGitLeaks(rootDirectory);
+  } catch (error) {
+    console.warn("GitLeaks unavailable, skipping GitLeaks scan.");
+  }
 
   issues.push(...gitLeaksIssues);
 

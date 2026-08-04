@@ -1,3 +1,8 @@
+export interface RepositoryFile {
+  path: string;
+  content: string;
+}
+
 export interface ScanResult {
   totalFiles: number;
   totalDirectories: number;

@@ -18,6 +18,10 @@ interface GitLeaksResult {
 export async function detectGitLeaks(
   rootDirectory: string,
 ): Promise<SecurityIssue[]> {
+  if (process.env.VERCEL) {
+  return [];
+}
+
   const reportPath = join(rootDirectory, `.gitleaks-${randomUUID()}.json`);
 
   try {
