@@ -129,3 +129,11 @@ model Repository {
   @@index([userId])
   @@map("repository")
 }
+
+model WebsiteStats {
+  id         Int      @id
+  totalVisits Int     @default(0)
+  updatedAt  DateTime @updatedAt
+
+  @@map("website_stats")
+}
