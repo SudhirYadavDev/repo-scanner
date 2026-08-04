@@ -11,41 +11,77 @@ export default function RepositoryScoreCard({
   score,
 }: RepositoryScoreCardProps) {
   const badgeColor = {
+    Excellent:
+      "border-emerald-200 bg-emerald-50 text-emerald-700",
+    Good:
+      "border-sky-200 bg-sky-50 text-sky-700",
+    Average:
+      "border-amber-200 bg-amber-50 text-amber-700",
+    Poor:
+      "border-red-200 bg-red-50 text-red-700",
+  }[score.rating];
+
+  const progressColor = {
     Excellent: "bg-emerald-500",
-    Good: "bg-blue-500",
+    Good: "bg-sky-500",
     Average: "bg-amber-500",
     Poor: "bg-red-500",
   }[score.rating];
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h2 className="text-xl font-bold text-zinc-900">Repository Health</h2>
+    <section className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-400">
+            Repository Analysis
+          </p>
 
-          <p className="mt-2 text-sm leading-relaxed text-zinc-500">
-            Overall project quality based on detected technologies, tooling and
-            repository structure.
+          <h2 className="mt-2 text-3xl font-bold text-zinc-900">
+            Repository Health
+          </h2>
+
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-500">
+            Overall project quality calculated from project structure,
+            technologies, tooling, best practices and repository
+            configuration.
           </p>
         </div>
 
-        <div className="text-center">
-          <p className="text-5xl font-black text-zinc-900">{score.overall}</p>
+        <div className="flex flex-col items-center rounded-2xl border border-zinc-200 bg-zinc-50 px-8 py-6">
+          <span className="text-xs uppercase tracking-wider text-zinc-500">
+            Overall Score
+          </span>
 
-          <p className="text-xs text-zinc-500">out of 100</p>
+          <h3 className="mt-2 text-6xl font-black text-zinc-900">
+            {score.overall}
+          </h3>
+
+          <span className="text-sm text-zinc-500">
+            out of 100
+          </span>
 
           <span
-            className={`mt-3 inline-flex rounded-full px-4 py-1 text-xs font-semibold text-white ${badgeColor}`}
+            className={`mt-4 rounded-full border px-4 py-1.5 text-sm font-semibold ${badgeColor}`}
           >
             {score.rating}
           </span>
         </div>
       </div>
 
-      <div className="mt-6">
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-200">
+      <div className="mt-8">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-sm font-medium text-zinc-700">
+            Health Score
+          </span>
+
+          <span className="text-sm font-semibold text-zinc-500">
+            {score.overall}%
+          </span>
+        </div>
+
+        <div className="h-3 overflow-hidden rounded-full bg-zinc-200">
           <div
-            className="h-full rounded-full bg-emerald-500 transition-all"
+            className={`h-full rounded-full transition-all duration-700 ${progressColor}`}
             style={{
               width: `${score.overall}%`,
             }}
@@ -53,51 +89,65 @@ export default function RepositoryScoreCard({
         </div>
       </div>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <div>
-          <h3 className="mb-3 text-sm font-semibold text-emerald-700">
-            Detected
-          </h3>
+      <div className="mt-8 grid gap-6 xl:grid-cols-2">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-base font-semibold text-emerald-700">
+              ✓ Strengths
+            </h3>
 
-          <div className="flex flex-wrap gap-2">
-            {score.passed.length === 0 ? (
-              <span className="text-sm text-zinc-400">Nothing detected</span>
-            ) : (
-              score.passed.map((item) => (
+            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+              {score.passed.length}
+            </span>
+          </div>
+
+          {score.passed.length === 0 ? (
+            <p className="text-sm text-zinc-500">
+              Nothing detected.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {score.passed.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700"
+                  className="rounded-full border border-emerald-200 bg-white px-3 py-1.5 text-xs font-medium text-emerald-700"
                 >
                   {item}
                 </span>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div>
-          <h3 className="mb-3 text-sm font-semibold text-red-600">
-            Missing / Improve
-          </h3>
+        <div className="rounded-2xl border border-red-200 bg-red-50/40 p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-base font-semibold text-red-700">
+              ⚠ Improvements
+            </h3>
 
-          <div className="flex flex-wrap gap-2">
-            {score.missing.length === 0 ? (
-              <span className="text-sm text-zinc-400">
-                No improvements required
-              </span>
-            ) : (
-              score.missing.map((item) => (
+            <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
+              {score.missing.length}
+            </span>
+          </div>
+
+          {score.missing.length === 0 ? (
+            <p className="text-sm text-zinc-500">
+              No improvements required.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {score.missing.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700"
+                  className="rounded-full border border-red-200 bg-white px-3 py-1.5 text-xs font-medium text-red-700"
                 >
                   {item}
                 </span>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

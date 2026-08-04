@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  FolderGit2,
+  Code2,
+  ShieldCheck,
+  Star,
+  GitFork,
+  Activity,
+  Clock3,
+} from "lucide-react";
+
 import { ImportedRepository } from "../types/importedRepository";
 import ImportedRepositoryRow from "./ImportedRepositoryRow";
 
@@ -19,37 +29,61 @@ export default function ImportedRepositoryTable({
   }
 
   return (
-    <div className="h-full overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <div className="h-full overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
       <div className="h-full overflow-y-auto">
         <table className="w-full table-fixed">
-          <thead className="sticky top-0 z-10 border-b border-zinc-200 bg-zinc-100">
-            <tr>
-              <th className="w-[30%] px-4 py-3 text-left font-semibold">
-                Repository
+          <thead className="sticky top-0 z-10 border-b border-zinc-200 bg-linear-to-b from-zinc-50 to-zinc-100 backdrop-blur">
+            <tr className="text-zinc-700">
+              <th className="w-[32%] px-4 py-4 text-left">
+                <div className="flex items-center gap-2 font-semibold">
+                  <FolderGit2 size={17} className="text-sky-600" />
+                  Repository
+                </div>
               </th>
 
-              <th className="w-[12%] px-4 py-3 text-left font-semibold">
-                Language
+              <th className="w-[14%] px-4 py-4 text-left">
+                <div className="flex items-center gap-2 font-semibold">
+                  <Code2 size={17} className="text-emerald-600" />
+                  Language
+                </div>
               </th>
 
-              <th className="w-[12%] px-4 py-3 text-left font-semibold">
-                Visibility
+              <th className="w-[12%] px-4 py-4 text-left">
+                <div className="flex items-center gap-2 font-semibold">
+                  <ShieldCheck size={17} className="text-violet-600" />
+                  Visibility
+                </div>
               </th>
 
-              <th className="w-[8%] px-4 py-3 text-right font-semibold">
-                Stars
+              <th className="w-[9%] px-4 py-4 text-right">
+                <div className="flex items-center justify-end gap-2 font-semibold">
+                  <Star
+                    size={17}
+                    className="fill-amber-400 text-amber-500"
+                  />
+                  Stars
+                </div>
               </th>
 
-              <th className="w-[8%] px-4 py-3 text-right font-semibold">
-                Forks
+              <th className="w-[9%] px-4 py-4 text-right">
+                <div className="flex items-center justify-end gap-2 font-semibold">
+                  <GitFork size={17} className="text-cyan-600" />
+                  Forks
+                </div>
               </th>
 
-              <th className="w-[15%] px-4 py-3 text-center font-semibold">
-                Action
+              <th className="w-[12%] px-4 py-4 text-center">
+                <div className="flex items-center justify-center gap-2 font-semibold">
+                  <Activity size={17} className="text-rose-600" />
+                  Action
+                </div>
               </th>
 
-              <th className="w-[15%] px-4 py-3 text-left font-semibold">
-                Last Synced
+              <th className="w-[12%] px-4 py-4 text-left">
+                <div className="flex items-center gap-2 font-semibold">
+                  <Clock3 size={17} className="text-zinc-600" />
+                  Synced
+                </div>
               </th>
             </tr>
           </thead>
