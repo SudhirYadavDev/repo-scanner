@@ -4,12 +4,7 @@ import Image from "next/image";
 
 import { signIn } from "@/lib/auth-client";
 
-interface LandingPageProps {
-  visits: number;
-  showCounter: boolean;
-}
-
-export default function LandingPage({ visits, showCounter }: LandingPageProps) {
+export default function LandingPage() {
   const handleGitHubLogin = async () => {
     await signIn.social({
       provider: "github",
@@ -23,15 +18,6 @@ export default function LandingPage({ visits, showCounter }: LandingPageProps) {
         <h1 className="text-xl font-bold tracking-tight">
           Repo<span className="text-emerald-500">Scanner</span>
         </h1>
-        {showCounter && (
-          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2">
-            <p className="text-xs uppercase tracking-wider text-emerald-400">
-              Visits
-            </p>
-
-            <p className="text-xl font-bold">{visits}</p>
-          </div>
-        )}
 
         <button
           onClick={handleGitHubLogin}
